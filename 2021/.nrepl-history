@@ -1,0 +1,2 @@
+(map [1 2 3] print)
+(doall (map print [1 2 3]))
