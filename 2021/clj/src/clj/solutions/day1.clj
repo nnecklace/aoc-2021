@@ -5,8 +5,7 @@
   [numbers]
   (->> numbers
        (partition 2 1)
-       (map #(apply < %))
-       (filter true?)
+       (filter #(apply < %))
        count))
 
 (defn task-2
@@ -21,4 +20,4 @@
 (defn solve
   [input]
   (let [numbers (as-> input $ (str/split $ #"\n") (map #(Integer/parseInt %) $))]
-    (println (task-2 numbers))))
+    (println (task-1 numbers))))
