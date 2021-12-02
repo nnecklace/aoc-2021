@@ -15,17 +15,20 @@
 
 (defn task-2
   [commands]
-  (->> commands
-       (reduce
-        (fn [acc item]
-          (case (first item)
-            "up" (update acc :aim - (second item))
-            "down" (update acc :aim + (second item))
-            "forward" (-> acc (update :horizontal + (second item)) (update :vertical + (* (second item) (:aim acc))))))
-        {:horizontal 0 :vertical 0 :aim 0})))
+  (as-> commands $
+    (reduce
+     (fn [acc item]
+       (case (first item)
+         "up" (update acc :aim - (second item))
+         "down" (update acc :aim + (second item))
+         "forward" (-> acc (update :horizontal + (second item)) (update :vertical + (* (second item) (:aim acc))))))
+     {:horizontal 0 :vertical 0 :aim 0} $)
+    (dissoc $ :aim)
+    (vals $)
+    (apply * $)))
 
 (defn solve
   [input]
   (let [numbers (as-> input $ (str/split $ #"\n") (map #(str/split % #" ") $) (map #(vector (first %) (Integer/parseInt (second %))) $))]
-    (println (task-1 numbers))))
+    (println (task-2 numbers))))
 
