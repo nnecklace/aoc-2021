@@ -1,6 +1,6 @@
 (ns clj.core
   (:gen-class)
-  (:require [clj.solutions.day1 :refer [solve]]))
+  (:require [clj.solutions.day2 :refer [solve]]))
 
 (def input (atom ""))
 
